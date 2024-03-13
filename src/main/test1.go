@@ -26,7 +26,7 @@ func test1() {
 	//rand.Seed(time.Now().UTC().UnixNano())
 	//lissajous(os.Stdout)
 
-	test7()
+	test10()
 }
 
 func lissajous(out io.Writer) {
@@ -151,4 +151,41 @@ func test7() {
 
 	fmt.Printf("%08b\n", x<<1) // "01000100", the set {2, 6}
 	fmt.Printf("%08b\n", x>>1) //
+}
+
+type Point struct{ X, Y float64 }
+
+func (p Point) Add(q Point) Point {
+	return Point{p.X + q.X, p.Y + q.Y}
+}
+
+func (p Point) Ohter(q Point) {
+	_ = Point{p.X + q.X, p.Y + q.Y}
+}
+func (p Point) Sub(q Point) Point {
+	return Point{p.X - q.X, p.Y - q.Y}
+}
+
+type Path []Point
+
+func (path Path) TranslateBy(offset Point, add bool) {
+	var op func(p, l Point) Point
+	if add {
+		op = Point.Add
+	} else {
+		op = Point.Sub
+	}
+	for i, _ := range path {
+		print(i)
+		// Call either path[i].Add(offset) or path[i].Sub(offset).
+		path[i] = op(path[i], offset)
+	}
+}
+
+func test10() {
+	var path = Path{{2.0, 6.0}}
+	point := Point{3.0, 4.0}
+	path.TranslateBy(point, true)
+
+	fmt.Println(path)
 }
