@@ -9,6 +9,7 @@ import (
 	"io"
 	"math"
 	"math/rand"
+	"strings"
 )
 
 var palette = []color.Color{color.White, color.Black}
@@ -25,7 +26,7 @@ func test1() {
 	//rand.Seed(time.Now().UTC().UnixNano())
 	//lissajous(os.Stdout)
 
-	test3()
+	test10()
 }
 
 func lissajous(out io.Writer) {
@@ -102,11 +103,89 @@ func test3() {
 
 func test4() {
 
+	//value := gcd(8, 4)
+
+	medals := []string{"gold", "silver", "bronze"}
+
+	fmt.Println("medals +", strings.Join(medals, " - "))
 }
 
 func gcd(x, y int) int {
 	for y != 0 {
+
+		fmt.Printf("11 x%d y %d\n", x, y)
+
 		x, y = y, x%y
+
+		fmt.Printf("x %d y %d\n", x, y)
 	}
 	return x
+}
+
+//var pc [256]byte = func() (pc [256]byte) {
+//	for i := range pc {
+//		pc[i] = pc[i/2] + byte(i&1)
+//
+//		fmt.Printf("pc %d %s %s %s\n", i, pc[i/2], byte(i&1), pc[i])
+//	}
+//	return
+//}()
+
+func test7() {
+	var x uint8 = 1<<1 | 1<<5
+	var y uint8 = 1<<1 | 1<<2
+
+	fmt.Printf("%08b\n", x) // "00100010", the set {1, 5}
+	fmt.Printf("%08b\n", y) // "00000110", the set {1, 2}
+
+	fmt.Printf("%08b\n", x&y)  // "00000010", the intersection {1}
+	fmt.Printf("%08b\n", x|y)  // "00100110", the union {1, 2, 5}
+	fmt.Printf("%08b\n", x^y)  // "00100100", the symmetric difference {2, 5}
+	fmt.Printf("%08b\n", x&^y) // "00100000", the difference {5}
+
+	for i := uint(0); i < 8; i++ {
+		if x&(1<<i) != 0 { // membership test
+			fmt.Println(i) // "1", "5"
+		}
+	}
+
+	fmt.Printf("%08b\n", x<<1) // "01000100", the set {2, 6}
+	fmt.Printf("%08b\n", x>>1) //
+}
+
+type Point struct{ X, Y float64 }
+
+func (p Point) Add(q Point) Point {
+	return Point{p.X + q.X, p.Y + q.Y}
+}
+
+func (p Point) Ohter(q Point) {
+	_ = Point{p.X + q.X, p.Y + q.Y}
+}
+func (p Point) Sub(q Point) Point {
+	return Point{p.X - q.X, p.Y - q.Y}
+}
+
+type Path []Point
+
+func (path Path) TranslateBy(offset Point, add bool) {
+	var op func(p, l Point) Point
+	if add {
+		op = Point.Add
+	} else {
+		op = Point.Sub
+	}
+	for i, _ := range path {
+		print(i)
+		// Call either path[i].Add(offset) or path[i].Sub(offset).
+		path[i] = op(path[i], offset)
+	}
+}
+
+func test10() {
+	var path = Path{{2.0, 6.0}}
+	point := Point{3.0, 4.0}
+	path.TranslateBy(point, true)
+
+	fmt.Println(path)
 }
