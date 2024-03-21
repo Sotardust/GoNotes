@@ -185,6 +185,7 @@ func (path Path) TranslateBy(offset Point, add bool) {
 func test10() {
 	var path = Path{{2.0, 6.0}}
 	point := Point{3.0, 4.0}
+
 	path.TranslateBy(point, true)
 
 	fmt.Println(path)
