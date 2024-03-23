@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "person.proto";
+
+option go_package = "/person";
+
+package prototest;
+
+service PersonService{
+
+  rpc GetPersonInfo (PersonRequest) returns (PersonResponse);
+
+}

@@ -9,3 +9,12 @@ message Person{
   int32 age = 2;
   repeated string hobbies = 3 ;
 }
+
+message PersonRequest{
+  string id = 1;
+}
+
+
+message PersonResponse{
+  Person person = 1;
+}
