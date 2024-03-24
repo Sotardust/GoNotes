@@ -2,6 +2,7 @@ package person
 
 import (
 	"context"
+	"github.com/sirupsen/logrus"
 )
 
 type ServiceImpl struct {
@@ -17,4 +18,8 @@ func (_ *ServiceImpl) GetPersonInfo(ctx context.Context, request *PersonRequest)
 	}
 
 	return response, nil
+}
+
+func (_ *ServiceImpl) mustEmbedUnimplementedPersonServiceServer() {
+	logrus.Info("mustEmbedUnimplementedPersonServiceServer")
 }

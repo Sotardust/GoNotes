@@ -70,7 +70,7 @@ type UnsafePersonServiceServer interface {
 	mustEmbedUnimplementedPersonServiceServer()
 }
 
-func RegisterPersonServiceServer(s grpc.ServiceRegistrar, srv *ServiceImpl) {
+func RegisterPersonServiceServer(s grpc.ServiceRegistrar, srv PersonServiceServer) {
 	s.RegisterService(&PersonService_ServiceDesc, srv)
 }
 

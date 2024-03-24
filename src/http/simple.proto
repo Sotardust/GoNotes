@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "annotations.proto";
+
+//option go_package =""
+
+message SimpleResponse{
+  int32 code = 1;
+  string data = 2;
+}
+
+message StreamRequest{
+  int32 id = 1;
+  string stream_data = 2;
+}
+service Route {
+  rpc getRouteList (StreamRequest) returns (SimpleResponse){
+    option (google.api.http) = {
+      get :"/v1/simple/{id}"
+    };
+  };
+}

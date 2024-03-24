@@ -1,0 +1,30 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/infuturetech/open-api/api
+    except:
+      - buf.build/googleapis/googleapis
+
+plugins:
+  - plugin: buf.build/grpc/go:v1.3.0
+    out: api
+    opt:
+      - require_unimplemented_servers=false
+      - paths=source_relative
+      # - mod
+
+  - plugin: buf.build/grpc-ecosystem/gateway:v2.18.1
+    out: api
+    opt:
+      - paths=source_relative
+
+  - plugin: buf.build/protocolbuffers/go:v1.32.0
+    out: api
+    opt:
+      - paths=source_relative
+
+  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.18.1
+    out: api
+    # opt:
+      # - paths=source_relative
