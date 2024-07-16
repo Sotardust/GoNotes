@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.3
-// source: server.proto
+// source: server1.proto
 
 package person
 
@@ -46,7 +46,7 @@ func (c *personServiceClient) GetPersonInfo(ctx context.Context, in *PersonReque
 	return out, nil
 }
 
-// PersonServiceServer is the server API for PersonService service.
+// PersonServiceServer is the server1 API for PersonService service.
 // All implementations must embed UnimplementedPersonServiceServer
 // for forward compatibility
 type PersonServiceServer interface {
@@ -105,5 +105,5 @@ var PersonService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "server.proto",
+	Metadata: "server1.proto",
 }

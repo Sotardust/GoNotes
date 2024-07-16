@@ -21,9 +21,9 @@ func TestServer(t *testing.T) {
 
 	person.RegisterPersonServiceServer(s, &person.ServiceImpl{})
 
-	logrus.Infof("server listening at %v", lin.Addr())
+	logrus.Infof("server1 listening at %v", lin.Addr())
 
 	if err := s.Serve(lin); err != nil {
-		logrus.Fatalf("failed to server :%v", err)
+		logrus.Fatalf("failed to server1 :%v", err)
 	}
 }
