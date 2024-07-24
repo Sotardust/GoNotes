@@ -1,0 +1,11 @@
+{
+  "Log": {
+    "Level": "debug"
+  },
+  "Mysql": {
+    "Addr": "127.0.0.1",
+    "User": "root",
+    "Password": "123456",
+    "DB": "lottery"
+  }
+}
